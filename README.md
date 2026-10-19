@@ -30,7 +30,7 @@ pip install -r requirements.txt
 # 또는 주요 패키지 직접 설치
 pip install segmentation-models-pytorch albumentations lightgbm shap scikit-image timm opencv-python-headless joblib
 
-### 2. 파이프라인 단계별 실행
+# 파이프라인 단계별 실행
 
 # Step 0: 개발 환경 준비 및 디렉토리 생성
 python src/step00_setup.py
