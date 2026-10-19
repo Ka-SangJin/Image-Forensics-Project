@@ -13,3 +13,39 @@
   * 이미지의 비율 distort(왜곡)를 방지하면서 고정 해상도($256 \times 256$)로 패딩 처리하는 `letterbox_resize` 유틸리티 개발 및 연동
 * **전처리 자동화 및 검증 모듈 구축**:
   * Colab 환경의 I/O 병목 및 마운트 연결 끊김 현상을 방지하기 위해 로컬 ZIP 복사 및 무결성 검증(경로 오류, 중복, 데이터 누수 체크) 자동화 스크립트 작성
+
+
+
+## How to Run (실행 방법)
+
+본 프로젝트는 **독립적인 Python 스크립트 실행 환경**과 **Google Colab 실행 환경**을 모두 지원합니다.
+
+---
+
+### 1. 환경 설정 (Installation)
+
+필요한 라이브러리를 설치합니다.
+```bash
+pip install -r requirements.txt
+# 또는 주요 패키지 직접 설치
+pip install segmentation-models-pytorch albumentations lightgbm shap scikit-image timm opencv-python-headless joblib
+
+### 2. 파이프라인 단계별 실행
+
+# Step 0: 개발 환경 준비 및 디렉토리 생성
+python src/step00_setup.py
+
+# Step 1: 데이터 압축 해제 및 dataset.csv 생성/검증
+python src/step01_data_prep.py --defacto_zip path/to/defacto.zip --coco_zip path/to/coco.zip
+
+# Step 2: Stage 1 U-Net 모델 학습 (Repeated Hold-out)
+python src/step02_train_stage1.py
+
+# Step 3: Stage 1 Heatmap 생성 및 16가지 포렌식 특징(Feature) 추출
+python src/step03_heatmap_features.py
+
+# Step 4: Stage 2 LightGBM 모델 5-Fold CV 학습 및 분류 최적화
+python src/step04_train_stage2.py
+
+# Step 5: 최종 Test 세트 평가, SHAP 분석 및 시각화 생성
+python src/step05_evaluate.py
