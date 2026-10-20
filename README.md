@@ -172,10 +172,6 @@ Image-Forensics-Detection/
 - SHAP
 - Matplotlib
 
-### Execution
-
-프로젝트는 Google Colab 환경을 기준으로 구성되었습니다.
-
 최상위의 `forensic_colab_runner.ipynb`에서 실행 흐름을 확인할 수 있으며, 각 단계의 구현 코드는 `src/` 폴더에 정리했습니다.
 
 실행 시 데이터셋과 학습된 모델 파일이 별도로 필요하며, Google Drive 경로 설정을 사용 환경에 맞게 수정해야 합니다.
